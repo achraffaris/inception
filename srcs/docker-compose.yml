@@ -1,25 +1,38 @@
 version: '3.9'
 services:
   nginx:
+    container_name: nginx
+    depends_on:
+      - wordpress
     build: requirements/nginx/
+    restart: always
     ports:
       - 443:443
     volumes:
       - type: bind
         source: ./logs/nginx
         target: /var/log/nginx/
+  wordpress:
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    build: requirements/wordpress/
+    restart: always
+    env_file:
+      - .env
   mariadb:
+    container_name: mariadb
     build:
       context: requirements/mariadb/
       args:
         - DB_NAME
         - DB_USER
         - DB_PASSWORD
-    restart: always
-    
     volumes:
       - type: bind
         source: ./logs/nginx
         target: /var/log/mariadb/
+    restart: always
     env_file:
       - .env
+  

@@ -27,3 +27,5 @@
 172.18.0.1 - - [09/Aug/2023:12:39:47 +0000] "GET /var/log/nginx/ HTTP/1.1" 404 146 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:109.0) Gecko/20100101 Firefox/114.0" "-"
 172.18.0.1 - - [09/Aug/2023:12:40:24 +0000] "GET /var/log/nginx/ HTTP/1.1" 404 146 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:109.0) Gecko/20100101 Firefox/114.0" "-"
 172.18.0.1 - - [09/Aug/2023:12:40:25 +0000] "GET /var/log/nginx/ HTTP/1.1" 404 146 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:109.0) Gecko/20100101 Firefox/114.0" "-"
+172.18.0.1 - - [14/Aug/2023:09:34:22 +0000] "GET / HTTP/1.1" 403 146 "https://achraffaris-urban-rotary-phone-49x66p4w9762j9rv.github.dev/" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/116.0" "10.240.4.70"
+172.18.0.1 - - [14/Aug/2023:09:34:22 +0000] "GET /favicon.ico HTTP/1.1" 404 146 "https://achraffaris-urban-rotary-phone-49x66p4w9762j9rv-443.app.github.dev/" "Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/116.0" "10.240.4.70"
