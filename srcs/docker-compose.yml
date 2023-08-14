@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  nginx:
+    build: requirements/nginx/
+    ports:
+      - 443:443
+    volumes:
+      - type: bind
+        source: ./logs/nginx
+        target: /var/log/nginx/
+  mariadb:
+    build:
+      context: requirements/mariadb/
+      args:
+        - DB_NAME
+        - DB_USER
+        - DB_PASSWORD
+    restart: always
+    
+    volumes:
+      - type: bind
+        source: ./logs/nginx
+        target: /var/log/mariadb/
+    env_file:
+      - .env
