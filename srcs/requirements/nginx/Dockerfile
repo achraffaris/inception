@@ -1,6 +1,6 @@
 FROM alpine:3.18.3
 
-EXPOSE 80
+EXPOSE 443
 
 RUN apk update && apk upgrade && apk add sudo bash openssl nginx
 
