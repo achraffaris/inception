@@ -1,4 +1,7 @@
 version: '3.9'
+networks:
+  inception:
+    name: inception   
 services:
   nginx:
     container_name: nginx
@@ -7,32 +10,48 @@ services:
     build: requirements/nginx/
     restart: always
     ports:
-      - 443:443
+      - 80:80
     volumes:
-      - type: bind
-        source: ./logs/nginx
-        target: /var/log/nginx/
+      - wordpress:/var/www/html
+      - wordpress:/var/log/nginx
+    networks:
+      - inception
   wordpress:
     container_name: wordpress
     depends_on:
       - mariadb
-    build: requirements/wordpress/
+    build:
+      context: requirements/wordpress/
     restart: always
+    
     env_file:
       - .env
+    volumes:
+      - wordpress:/var/www/html
+      - wordpress:/var/www/html/wp-content/debug.log
+    networks:
+      - inception
   mariadb:
     container_name: mariadb
     build:
       context: requirements/mariadb/
       args:
-        - DB_NAME
-        - DB_USER
-        - DB_PASSWORD
+        - DB_NAME:${DB_NAME}
+        - DB_USER:${DB_USER}
+        - DB_PASSWORD:${DB_PASSWORD}
     volumes:
       - type: bind
         source: ./logs/nginx
-        target: /var/log/mariadb/
+        target: /var/log/mysql/
+    networks:
+      - inception
     restart: always
     env_file:
       - .env
-  
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/codespace/data
+      o: bind

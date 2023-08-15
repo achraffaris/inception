@@ -1,4 +1,5 @@
 #! /bin/bash
+
 service mysql start
 
 echo "CREATE DATABASE IF NOT EXISTS $DB_NAME;" > db1.sql
@@ -10,3 +11,4 @@ mysql < db1.sql
 
 service mysql stop
 
+mysqld_safe
