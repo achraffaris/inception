@@ -2,7 +2,7 @@ FROM debian:buster
 
 EXPOSE 9000
 
-RUN apt update && apt upgrade -y && apt install -y php-fpm php-mysql curl mariadb-client
+RUN apt-get update && apt-get upgrade -y && apt-get install -y php-fpm php-mysql curl mariadb-client
 
 COPY ./tools/setup_wp.sh .
 

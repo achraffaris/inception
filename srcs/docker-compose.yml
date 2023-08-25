@@ -13,7 +13,6 @@ services:
       - 443:443
     volumes:
       - wordpress:/var/www/html
-      - wordpress:/var/log/nginx
     networks:
       - inception
   wordpress:
@@ -27,8 +26,7 @@ services:
     env_file:
       - .env
     volumes:
-      - wordpress:/var/www/html
-      - wordpress:/var/www/html/wp-content/debug.log
+      - wordpress:/var/www/html/
     networks:
       - inception
   mariadb:
@@ -36,22 +34,24 @@ services:
     build:
       context: requirements/mariadb/
       args:
-        - DB_NAME:${DB_NAME}
-        - DB_USER:${DB_USER}
-        - DB_PASSWORD:${DB_PASSWORD}
+        - DB_NAME=${DB_NAME}
+        - DB_USER=${DB_USER}
+        - DB_PASSWORD=${DB_PASSWORD}
     volumes:
-      - type: bind
-        source: ./logs/nginx
-        target: /var/log/mysql/
+      - mariadb:/var/lib/mysql
     networks:
       - inception
     restart: always
-    env_file:
-      - .env
 volumes:
   wordpress:
     driver: local
     driver_opts:
       type: none
-      device: /home/codespace/data
+      device: /home/afaris/data/wordpress
+      o: bind
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/afaris/data/mariadb
       o: bind

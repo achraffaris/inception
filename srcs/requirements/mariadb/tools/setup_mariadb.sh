@@ -10,5 +10,3 @@ echo "FLUSH PRIVILEGES;" >> db1.sql
 mysql < db1.sql
 
 service mysql stop
-
-mysqld_safe
