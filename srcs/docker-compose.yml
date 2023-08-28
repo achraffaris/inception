@@ -42,16 +42,6 @@ services:
     networks:
       - inception
     restart: always
-  web:
-    container_name: web
-    build:
-      context: bonus/web
-    networks:
-      - inception
-    ports:
-      - 8000:8000
-    env_file:
-      - bonus/.env
 volumes:
   wordpress:
     driver: local

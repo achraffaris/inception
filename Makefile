@@ -1,13 +1,25 @@
-COMPOSE = docker compose
+COMPOSE = docker-compose
 COMPOSE_FILE=srcs/docker-compose.yml
 
-down:
-	$(COMPOSE) -f $(COMPOSE_FILE) down 
+all:
+	docker-compose -f $(COMPOSE_FILE) up -d
 
 build:
-	$(COMPOSE) -f $(COMPOSE_FILE) build --no-cache 
-run: build
-	$(COMPOSE) -f $(COMPOSE_FILE) up 
+	docker-compose -f $(COMPOSE_FILE) up -d --build
 
-	
-	
+down:
+	docker-compose -f $(COMPOSE_FILE) down
+
+re:	down
+	docker-compose -f $(COMPOSE_FILE) up -d --build
+
+clean: down
+	docker system prune -a
+
+fclean:
+	docker stop $$(docker ps -qa)
+	docker system prune --all --force --volumes
+	docker network prune --force
+	docker volume prune --force
+
+.PHONY	: all build down re clean fclean
